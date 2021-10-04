@@ -1,17 +1,39 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React, {Component} from 'react';
+import ReactDom from 'react-dom';
+import 'semantic-ui-css/semantic.min.css'
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+import Count from './Count';
+import Button from './Button';
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+class App extends Component{
+    state = {
+        count : 0
+    }
+
+    incrementCount = id =>{
+        this.setState( prevState => {
+            return {
+                count : prevState.count +id
+            }
+        })
+    }
+    render(){
+        return(
+            <div style={{textAlign : 'center'}}>
+                <br/>
+                <Count counter={this.state.count}/>
+                <br/>
+                
+                <Button incrementCount={this.incrementCount} value={1} />
+                <Button incrementCount={this.incrementCount} value={2} />
+                <Button incrementCount={this.incrementCount} value={5} />
+                <Button incrementCount={this.incrementCount} value={10} />
+                <Button incrementCount={this.incrementCount} value={20} />
+                <Button incrementCount={this.incrementCount} value={50} />
+                <Button incrementCount={this.incrementCount} value={1000} />
+            </div>
+        );
+    };
+};
+
+ReactDom.render(<App />, document.querySelector('#root'));
